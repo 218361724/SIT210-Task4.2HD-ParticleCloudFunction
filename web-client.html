@@ -1,0 +1,39 @@
+<head>
+  <title>SIT210 4.2HD Particle Cloud Function</title>
+</head>
+
+<body>
+  <h1>SIT210 4.2HD Particle Cloud Function</h1>
+  <h3>Student ID: 218361724</h3>
+  <br>
+  <br>
+  <button id="toggle-red-led">Toggle RED light</button>
+  <br>
+  <br>
+  <button id="toggle-green-led">Toggle GREEN light</button>
+  <br>
+  <br>
+  <button id="toggle-blue-led">Toggle BLUE light</button>
+
+  <script>
+    // Authentication details (redacted for security purposes)
+    const particleAccessToken = "XX"; // Insert your token here
+    const particleDeviceId = "XX"; // Insert your device id here
+
+    // Toggle LEDs by integrating with particle "toggle_led" function
+    function toggleLed(color) {
+      const particleFuncReq = new XMLHttpRequest();
+      particleFuncReq.open("POST", `https://api.particle.io/v1/devices/${particleDeviceId}/toggle_led`) 
+      particleFuncReq.setRequestHeader("Content-Type", "application/x-www-form-urlencoded");
+      particleFuncReq.send(`access_token=${particleAccessToken}&args=${color}`);
+    }
+
+    // Handle click on led toggle button
+    const toggleRedLedBtn = document.getElementById("toggle-red-led");
+    const toggleGreenLedBtn = document.getElementById("toggle-green-led");
+    const toggleBlueLedBtn = document.getElementById("toggle-blue-led");
+    toggleRedLedBtn.addEventListener('click', event => { toggleLed("red"); });
+    toggleGreenLedBtn.addEventListener('click', event => { toggleLed("green"); });
+    toggleBlueLedBtn.addEventListener('click', event => { toggleLed("blue"); });
+  </script>
+</body>
